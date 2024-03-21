@@ -26,7 +26,9 @@ Pacote de gestão de dadoss do projeto Agilize
 Features
 --------
 
-* TODO
+* [ ] Criar Classe DB para manipulação de dados
+* [ ] Criar Classe de manipulação de arquivos
+
 
 Credits
 -------
