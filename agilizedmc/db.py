@@ -9,6 +9,11 @@ class DB:
         self.database = database
         self.connection = duckdb.connect(database=':memory:', read_only=False)
 
+        #check if mysql is installed
+        # if not, install mysql
+
+        self.connection.execute('INSTALL mysql; LOAD mysql;')
+
         if password is None:
             self.connection.execute(f'ATTACH \'host={self.host} user={self.user} port={self.port} database={self.database}\' AS mysqldb (TYPE mysql) ; USE mysqldb;')
         else:
