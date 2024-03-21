@@ -6,6 +6,7 @@ Development Lead
 ----------------
 
 * João Rafael Borowski Tedeschi <joaorafaelbt@gmail.com>
+* Artur Mangabeira Soares <>
 
 Contributors
 ------------

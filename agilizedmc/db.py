@@ -32,7 +32,13 @@ class DB:
             table_schema = [{'column_name': x[0], 'data_type': x[1], 'null' : x[2], 'key' : x[3], 'default_varchar' : x[4],'extra_varchar' : x[5] } for x in table_schema]
             schemas[table_name] = table_schema
         return schemas
-
-
     
+
+
+
+if __name__ == "__main__":
+    db = DB('localhost', 'root', None, '3306', 'osticketdb')
+    print(db.get_tables())
+
+
 
