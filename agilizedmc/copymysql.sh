@@ -20,7 +20,10 @@ mysqldump -u $DB_USER -p$DB_PASSWORD > $BACKUP_FILE
 gzip $BACKUP_FILE
 
 # Encrypt the zipped backup file using GPG
-gpg --output $BACKUP_FILE.gz.gpg --symmetric --cipher-algo AES256 $BACKUP_FILE.gz
+gpg --output $DB_BACKUP_DIR/$BACKUP_FILE.gz.gpg --symmetric --cipher-algo AES256 $BACKUP_FILE.gz
+
+echo "saving to $DB_BACKUP_DIR/$BACKUP_FILE.gz.gpg"
+
 
 #write the results into a log file in the format of date and time YYYY-MM-DD HH:MM:SS filename status
 echo "$(date +%Y-%m-%d) $(date +%H:%M:%S) $BACKUP_FILE.gz.gpg success" >> $DB_BACKUP_DIR/backup.log
