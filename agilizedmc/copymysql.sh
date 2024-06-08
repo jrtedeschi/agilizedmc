@@ -5,6 +5,7 @@ DB_USER=$MYSQL_USER
 DB_PASSWORD=$MYSQL_PASSWORD
 GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS
 GDRIVE_FOLDER_ID=$GDRIVE_FOLDER_ID
+PY_SCRIPT=$PY_SCRIPT
 
 DB_BACKUP_DIR=$MYSQL_BACKUP_DIR
 
@@ -34,9 +35,10 @@ echo "$(date +%Y-%m-%d) $(date +%H:%M:%S) $BACKUP_FILE.gz.gpg success" >> $DB_BA
 
 echo "MySQL database backup completed successfully!"
 
-# activate poetry environment
 
 
 # Upload the encrypted backup file to Google Drive
 
-poetry run python upload_file.py $DB_BACKUP_DIR/$BACKUP_FILE.gz.gpg $GDRIVE_FOLDER_ID $GOOGLE_APPLICATION_CREDENTIALS
+poetry run python $PY_SCRIPT $DB_BACKUP_DIR/$BACKUP_FILE.gz.gpg $GDRIVE_FOLDER_ID $GOOGLE_APPLICATION_CREDENTIALS
+
+echo "Backup file uploaded to Google Drive successfully!"
