@@ -28,7 +28,7 @@ gzip  $BACKUP_DIR/$BACKUP_FILE
 
 
 # #write the results into a log file in the format of date and time YYYY-MM-DD HH:MM:SS filename status
-echo "$(date +%Y-%m-%d) $(date +%H:%M:%S) $BACKUP_FILE.gz.gpg success" >> $DB_BACKUP_DIR/backup.log
+echo "$(date +%Y-%m-%d) $(date +%H:%M:%S) $BACKUP_FILE.gz success" >> $DB_BACKUP_DIR/backup.log
 
 # Remove the unencrypted backup file
 # rm $BACKUP_FILE.gz
@@ -39,6 +39,6 @@ echo "MySQL database backup completed successfully!"
 
 # Upload the encrypted backup file to Google Drive
 
-poetry run python $PY_SCRIPT $DB_BACKUP_DIR/$BACKUP_FILE.gz.gpg $GDRIVE_FOLDER_ID $GOOGLE_APPLICATION_CREDENTIALS
+poetry run python $PY_SCRIPT $DB_BACKUP_DIR/$BACKUP_FILE.gz $GDRIVE_FOLDER_ID $GOOGLE_APPLICATION_CREDENTIALS
 
 echo "Backup file uploaded to Google Drive successfully!"
