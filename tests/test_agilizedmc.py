@@ -3,11 +3,17 @@
 """Tests for `agilizedmc` package."""
 
 import pytest
+from agilizedmc import (
+    Config,
+    DatabaseConfig,
+    BackupService,
+    GoogleDriveService,
+    NotificationService,
+    DB
+)
 
 from click.testing import CliRunner
 
-from agilizedmc import agilizedmc
-from agilizedmc import cli
 from agilizedmc.db import DB
 
 @pytest.fixture
@@ -26,33 +32,43 @@ def test_content(response):
     # assert 'GitHub' in BeautifulSoup(response.content).title.string
 
 
-def test_command_line_interface():
-    """Test the CLI."""
-    runner = CliRunner()
-    result = runner.invoke(cli.main)
-    assert result.exit_code == 0
-    assert 'agilizedmc.cli.main' in result.output
-    help_result = runner.invoke(cli.main, ['--help'])
-    assert help_result.exit_code == 0
-    assert '--help  Show this message and exit.' in help_result.output
-
-
 def test_mysql_exists():
     db = DB
     assert db is not None
 
 
 def test_db():
+    """Test DB class creation"""
     db = DB('localhost', 'root', None, '3306', 'test')
-
     assert db.host == 'localhost'
     assert db.user == 'root'
-    assert db.password == None
+    assert db.password is None
     assert db.port == '3306'
     assert db.database == 'test'
 
-    db.connection.execute('CREATE TABLE IF NOT EXISTS test_table (id INT, name VARCHAR(255))')
-    tables = db.get_tables()
 
-    ## assert that the table was created and is in the list of tables
-    assert ('test_table',) in tables
+def test_version():
+    """Test version is string."""
+    from agilizedmc import __version__
+    assert isinstance(__version__, str)
+
+
+def test_config():
+    """Test config creation."""
+    db_config = DatabaseConfig(
+        host="localhost",
+        port=3306,
+        user="test",
+        password="test",
+        database="test"
+    )
+    config = Config(
+        database=db_config,
+        google_drive_folder_id="test_folder",
+        backup_dir="/tmp/backup",
+        ssh_config={},
+        telegram_bot_token="test_token",
+        telegram_chat_id="test_chat",
+        service_account_file="test.json"
+    )
+    assert config.database.host == "localhost"

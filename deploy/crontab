@@ -1,0 +1,2 @@
+# Run backup cleanup at 3 AM daily
+0 3 * * * /opt/agilizedmc/.venv/bin/python -m agilizedmc.scripts.cleanup_old_backups 

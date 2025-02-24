@@ -1,0 +1,17 @@
+[Unit]
+Description=MySQL Backup Service
+After=network.target mysql.service
+
+[Service]
+Type=simple
+User=backup-user
+Group=backup-user
+WorkingDirectory=/opt/agilizedmc
+Environment=PYTHONPATH=/opt/agilizedmc
+EnvironmentFile=/opt/agilizedmc/.env
+ExecStart=/opt/agilizedmc/.venv/bin/python -m agilizedmc.scripts.schedule_backup
+Restart=always
+RestartSec=60
+
+[Install]
+WantedBy=multi-user.target 

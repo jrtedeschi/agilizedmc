@@ -1,0 +1,14 @@
+database:
+  host: localhost
+  port: 3306
+  user: root
+  password: test_password
+  database: test_db
+
+backup_dir: /tmp/test_backups
+google_drive_folder_id: test_folder_id
+service_account_file: tests/config/test_service_account.json
+
+telegram:
+  bot_token: test_bot_token
+  chat_id: test_chat_id 

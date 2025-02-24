@@ -1,5 +1,8 @@
 #!/bin/bash
 
+
+source .env
+
 # Get credentials from the environment
 DB_USER=$MYSQL_USER
 DB_PASSWORD=$MYSQL_PASSWORD
@@ -16,7 +19,7 @@ mkdir -p $DB_BACKUP_DIR
 BACKUP_FILE="$BACKUP_DIR/backup_$(date +%Y%m%d).sql"
 
 # Perform the MySQL database backup
-mysqldump -u $DB_USER -p$DB_PASSWORD > $BACKUP_DIR/$BACKUP_FILE
+mysqldump -u $DB_USER -p $DB_PASSWORD > $BACKUP_DIR/$BACKUP_FILE
 
 # Zip the backup file
 gzip  $BACKUP_DIR/$BACKUP_FILE
